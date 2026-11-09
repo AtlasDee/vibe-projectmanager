@@ -36,12 +36,18 @@ _src/vibe-projectmanager/
    └─ NOTICE.md                     # 来源与许可
 └─ scripts/
    └─ prd_md5.py                    # 门禁用的 PRD 版本 md5（只用 Python 标准库，跨平台）
+vibe-projectmanager.skill           # 安装包（由 _src/vibe-projectmanager/ 打包）
 Public-log/public-log.md            # 更新日志
 ```
 
 ## 安装
 
-把 `_src/vibe-projectmanager/` 整个目录复制到 `~/.claude/skills/vibe-projectmanager/`，重开 Claude Code 会话即可。说「评审一下 PRD」「拆任务」「规划 Sprint」「写周报」等会触发。
+两种方式任选：
+
+- 下载根目录的 `vibe-projectmanager.skill`（zip 包，顶层目录为 `vibe-projectmanager/`），解压到 `~/.claude/skills/`；
+- 或把 `_src/vibe-projectmanager/` 整个目录复制到 `~/.claude/skills/vibe-projectmanager/`。
+
+`.skill` 包由 `_src/vibe-projectmanager/` 打包而成，两者内容一致。装好后重开 Claude Code 会话即可。说「评审一下 PRD」「拆任务」「规划 Sprint」「写周报」等会触发。
 
 依赖：
 - 门禁算 md5 需要 Python 3（只用标准库）。
