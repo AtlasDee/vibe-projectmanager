@@ -1,0 +1,22 @@
+# OS / editor / Python
+.DS_Store
+Thumbs.db
+__pycache__/
+
+# 公开仓库只发布：skill 源码（_src/）、README、对外日志（Public-log/）
+# 以下为内部资料，不公开：
+
+# 受管项目登记与通用规范（含本机路径、内部项目信息）
+项目概况.md
+
+# 内部完整日志（不脱敏；对外用 Public-log/public-log.md）
+log/changelog.md
+
+# 内部工具（校验脚本里有敏感字符串清单）
+tools/
+
+# 需求交付链路的产物（含真实需求名与内容）
+pm/
+
+# Claude Code 本机会话配置（含本地路径）
+.claude/

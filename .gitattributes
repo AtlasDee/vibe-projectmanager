@@ -1,0 +1,5 @@
+# 入库文本统一 LF（〇章第 9 条），不依赖本机 core.autocrlf
+* text=auto eol=lf
+*.skill binary
+*.png binary
+*.zip binary
