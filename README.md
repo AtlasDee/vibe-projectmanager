@@ -34,12 +34,19 @@ _src/vibe-projectmanager/
    ├─ sprint-status-retro.md        # 第 8～10 段：规划 Sprint、状态汇报、复盘
    ├─ governance.md                 # 项目级工件
    └─ NOTICE.md                     # 来源与许可
+└─ scripts/
+   └─ prd_md5.py                    # 门禁用的 PRD 版本 md5（只用 Python 标准库，跨平台）
 Public-log/public-log.md            # 更新日志
 ```
 
 ## 安装
 
 把 `_src/vibe-projectmanager/` 整个目录复制到 `~/.claude/skills/vibe-projectmanager/`，重开 Claude Code 会话即可。说「评审一下 PRD」「拆任务」「规划 Sprint」「写周报」等会触发。
+
+依赖：
+- 门禁算 md5 需要 Python 3（只用标准库）。
+- PRD 在云文档上时，需要一个能把云文档导出成 Markdown 的工具。本 skill 不绑定具体工具，也不假定它装在哪里：会先看你在 CLAUDE.md 里写明的工具，没有就问你，也可以由你手动导出后交给它。
+- 对 Lark / 飞书文档导出的固定文件头，`prd_md5.py --lark-export` 做了专门处理。
 
 ## 来源与许可
 
