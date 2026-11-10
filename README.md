@@ -19,6 +19,8 @@
 | RAID 日志 | 风险 / 假设 / 问题 / 依赖四类，每条有证据、具名负责人和复核日期；依赖写成约定，有升级触发条件 |
 | Sprint 容量 | 按团队近 3～6 轮的完成区间，承诺取低端；没有历史时才用公式兜底并标明是推算 |
 | 项目级工件 | 章程、干系人与沟通计划、决策日志（ADR）、变更请求（CR）、发布关卡，按需建立 |
+| 组合层 | 几条需求或项目同时在跑时：颜色只抄成员自报、没有证据标未知不标绿、不出组合平均色；资源冲突点名到人或技能并按重叠窗口算，解法限五种；跨项目风险看集中与同根；跨成员依赖由等待方登记；请求放在开头的组合汇报 |
+| 阶段评审 | 到了里程碑判下一阶段要不要继续投入：继续 / 有条件继续 / 暂停 / 返工 / 停止；门槛在上一次评审时写好，继续必须给出人、钱和下次评审日期，否则算暂停 |
 | 外部写操作 | 建工单、发汇报都要用户在当前这条消息里明确授权；线下动作列成用户待办，不写成已完成 |
 
 ## 目录
@@ -33,9 +35,11 @@ _src/vibe-projectmanager/
    ├─ tickets.md                    # 第 7 段：建工单
    ├─ sprint-status-retro.md        # 第 8～10 段：规划 Sprint、状态汇报、复盘
    ├─ governance.md                 # 项目级工件
+   ├─ portfolio.md                  # 组合层：多项目的风险、资源、依赖与汇总汇报
    └─ NOTICE.md                     # 来源与许可
 └─ scripts/
-   └─ prd_md5.py                    # 门禁用的 PRD 版本 md5（只用 Python 标准库，跨平台）
+   ├─ prd_md5.py                    # 门禁用的 PRD 版本 md5（只用 Python 标准库，跨平台）
+   └─ portfolio_rollup.py           # 组合汇总：读各成员 RAID 日志与资源分配表，只汇总不判断
 vibe-projectmanager.skill           # 安装包（由 _src/vibe-projectmanager/ 打包）
 Public-log/public-log.md            # 更新日志
 ```
@@ -56,4 +60,4 @@ Public-log/public-log.md            # 更新日志
 
 ## 来源与许可
 
-改编自三个 MIT 许可的开源技能：igmarin/agnostic-planning-skills、san-npm/skills-ws 的 project-management、AbsolutelySkilled 的 project-execution。逐项取舍、改动与许可原文见 [`_src/vibe-projectmanager/references/NOTICE.md`](_src/vibe-projectmanager/references/NOTICE.md)。
+改编自五个 MIT 许可的开源技能：igmarin/agnostic-planning-skills、san-npm/skills-ws 的 project-management、AbsolutelySkilled 的 project-execution、anotb/management-consulting-plugin 的 project-governance、mmoranodevelop/hard-half 的 portfolio-stage-gate 与 resource-collision。组合层另参考了 borghei/Claude-Skills（Commons Clause + MIT）的思路，未使用其代码，与其相近的规则逐条列在 NOTICE。逐项取舍、改动与许可原文见 [`_src/vibe-projectmanager/references/NOTICE.md`](_src/vibe-projectmanager/references/NOTICE.md)。

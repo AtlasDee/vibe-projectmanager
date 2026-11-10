@@ -1,12 +1,14 @@
 # 来源与许可
 
-本 skill 译写、改编自以下三个开源技能，均为 MIT 许可：
+本 skill 译写、改编自以下五个开源技能，均为 MIT 许可：
 
 | # | 来源 | 版本 / 取得方式 | 版权 |
 |---|---|---|---|
 | 1 | **igmarin/agnostic-planning-skills** · https://github.com/igmarin/agnostic-planning-skills | v5.1.0 | Copyright (c) 2026 Ismael G Marin Cabrera |
 | 2 | **san-npm/skills-ws** 的 `skills/project-management/SKILL.md` · https://github.com/san-npm/skills-ws | npm 包 skills-ws 1.12.0 对应的 main 分支 | Copyright (c) 2025 Commit Media SARL |
 | 3 | **AbsolutelySkilled** 的 `project-execution`（v0.1.0，维护者 maddhruv）· 原仓库现为 https://github.com/dhruvjainin/absolute | 该目录在 2026-06-05 的提交 `1ad2c4b`（cleanup & introduce AbsoluteWork）中被删除，取自其父提交 `2f13162` 的 `skills/project-execution/`：SKILL.md 与 3 份 references（risk-management、dependency-tracking、stakeholder-communication）；NeverSight/learn-skills.dev 的镜像缺 SKILL.md 的常见坑一节 | Copyright (c) 2026 AbsolutelySkilled（取自父提交 `2f13162` 的 LICENSE；原仓库现行 LICENSE 的版权行为 Absolute） |
+| 4 | **anotb/management-consulting-plugin** 的 `skills/project-governance`（v2.3.1）· https://github.com/anotb/management-consulting-plugin | 提交 `1489e7e`：SKILL.md 与 `references/risk-and-reporting.md` | Copyright (c) 2026 Anot |
+| 5 | **mmoranodevelop/hard-half** 的 `skills/management/portfolio-stage-gate` 与 `skills/delivery/resource-collision` · https://github.com/mmoranodevelop/hard-half | 提交 `1228fe2`：两份 SKILL.md 与 stage-gate 的 3 份模板 | Copyright (c) 2026 Manuel Morano |
 
 ## 取用与改动：来源 1
 
@@ -57,7 +59,7 @@
 | 干系人地图与沟通节奏 | `governance.md` 第 2 节 | 发起人同步频率两源冲突（来源 2 每两周，来源 3 每周），取每周，与坏消息早说一致 |
 | SKILL 正文的反模式表（风险只在开工时登记、依赖一视同仁、一直绿突然红、不带选项升级、悄悄扩范围、依赖只有一个联系人） | `risk-and-priority.md` 第 1 节与 1.3，`sprint-status-retro.md` 2.1、2.5，SKILL.md 第 6 节「范围是第一个调节杆」 | 化入对应规则，不单列；依赖一视同仁一条落为按强度和关键路径分轻重，未确认依赖的影响照实判 |
 | 升级五段式、先私下通气 | `sprint-status-retro.md` 2.5 | 私下通气等线下动作改为列给用户的待办 |
-| 里程碑 Go / 有条件 Go / No-Go | `governance.md` 第 6 节 | 与来源 2 的发布就绪清单合并 |
+| 发布 Go / 有条件 Go / No-Go | `governance.md` 第 6 节 | 与来源 2 的发布就绪清单合并；里程碑上要不要继续投入，改由第 7 节阶段评审管（来源 4、5） |
 | 「范围是第一个调节杆」「坏消息早说」 | SKILL.md 第 6 节 | — |
 | 常见坑（依赖只是假定为已确认、为回避难谈的话把黄报成绿、不带选项升级、跳过事前验尸、关卡走过场） | `risk-and-priority.md` 1.1、1.3，`sprint-status-retro.md` 2.1、2.5，`governance.md` 第 6 节 | 化入对应规则，不单列 |
 | `risk-management`：事前验尸各自独立写、假设盘点、往期复盘与按项目类型的常见风险 | `risk-and-priority.md` 1.1 | 上游四种识别技术中的依赖风险扫描，由来源 1 的六类模式顶替其位置，内容挪到 1.3 改称延误推演，范围从外部依赖扩大到每条依赖；假设盘点把大概率一档也登记进假设表（上游只把不确定、未验证两档列为风险候选），以便到期验证；常见风险只作提示，要落到本项目证据才登记 |
@@ -76,18 +78,69 @@
 
 上游各文件为英文，本 skill 全部改写为中文，未逐字照搬。
 
+## 取用与改动：来源 4（project-governance）
+
+| 内容 | 去向 | 改动 |
+|---|---|---|
+| 没有证据标未知、不把缺信息当成绿；颜色附定义与趋势 | `sprint-status-retro.md` 2.1、`portfolio.md` 第 1 节 | 加 ⚪ 未知；连续两期未知本身记为风险 |
+| 基线、当前预测、已批准变更分开；进度按已交付而非花费 | `sprint-status-retro.md` 2.2、2.3，`portfolio.md` 第 6 节 | — |
+| 打开的风险条数不代表健康 | `portfolio.md` 第 1 节 | — |
+| 阶段评审的结论：继续、有条件继续、返工、停止；条件落到具名角色和日期；过了评审不等于风险消失 | `governance.md` 第 7 节 | 与来源 5 合并，加暂停一种；与 PRD 门禁、发布关卡分工列表 |
+| 影响压过概率（安全、合规、业务连续性，低概率也升级）；未知影响先调查 | `risk-and-priority.md` 1.2、`portfolio.md` 第 3 节 | 来源列的范围还有偿付能力，本 skill 面向交付团队，未列；来源写的是可能需要升级，本 skill 改为一律按严重处理、直接升级给发起人或组合拍板人，并优先于未确认依赖的例外 |
+| 决策要写拖延的后果 | `portfolio.md` 第 6 节汇报开头 | — |
+| 咨询项目的治理论坛设计、挣值、成本预测、合同与咨询交付语境 | 不取 | 本 skill 面向内部交付团队；成本口径由章程约定 |
+
+## 取用与改动：来源 5（hard-half）
+
+| 内容 | 去向 | 改动 |
+|---|---|---|
+| portfolio-stage-gate：评审是资源决定不是状态会；一次只评一个；门槛与停止标准在上一次评审写好、不临场挪；无门槛只能返工；继续而无人、钱、下次日期即空头继续，改判暂停；不计沉没成本；证据随投入加码；评审人是下一阶段资源的拥有者；说不出何时叫停则不开评审；证据对照表与空缺；本阶段要验证的假设 | `governance.md` 第 7 节，`portfolio.md` 第 5 节 | 结论用中文五选一（继续、有条件继续、暂停、返工、停止），来源的 Go / Kill / Hold / Recycle 分别对应继续、停止、暂停、返工，有条件继续取自来源 4；Stage-Gate 是注册商标，本 skill 称阶段评审，不使用该商标；来源的商业论证、期权费等投资语境不取；另取：安全类门槛未达到只能返工或停止、评审次数与投入相称、从不叫停的组合要追问一句；阶段评审模板的结构（证据对照四列、要验证的假设四列、若继续一节）取自来源的 gate-paper 模板并译写；在来源之外加了唯一拍板人、首个阶段评审写进章程、缺门槛不开正式评审、有条件继续的条件登记 RAID |
+| resource-collision：冲突的定义（同一稀缺的人或技能、两个以上项目、窗口重叠）；点名到人或技能而非团队；需求与可用量要有来源，没有就留空缺；先写排序规则再解；五种解法（排先后、换人、推迟、放弃或停启、外采）；两边兼顾不算解法，除非双方同意并写明日期；关键技能无替补不对半分；只提一个请求；已确认与意向预订分开 | `portfolio.md` 第 2 节，`scripts/portfolio_rollup.py` 资源部分 | 冲突加上需求合计超过可用量的条件；资源分配表加起止日期、类型、预订列，脚本按日期重叠取峰值；改到里程碑的先走变更请求；计划外缓冲只在 Sprint 层扣；来源的不对半分限于安全关键技能，本 skill 扩大到没有替补的关键技能；在来源之外加了可用量列与单个成员内部超出不算组合冲突 |
+| 两个技能的拒答与转交其他技能的路由、利用率不作为决定依据的立场 | 部分取 | 不取路由；利用率只作线索，组合台账不出总分 |
+
+## 参考：borghei/Claude-Skills（非 MIT，只取思路）
+
+| 参考 | 版本 | 许可 |
+|---|---|---|
+| **borghei/Claude-Skills** 的 `project-management/program-manager` 与 `project-management/senior-pm` · https://github.com/borghei/Claude-Skills | 提交 `25bf86b` | Commons Clause License Condition v1.0 + MIT，Copyright (c) 2025-2026 Amin Borghei |
+
+该许可在 MIT 之上附加 Commons Clause：不得售卖该软件，也不得以它的功能为全部或主要价值提供收费产品或服务（包括托管、咨询、支持类收费服务）；分发其副本或实质部分时，须附带许可与该声明。
+
+本 skill 没有使用它的代码：`scripts/portfolio_rollup.py` 读本 skill 自己的 Markdown 格式，与它读 JSON 的脚本无关。组合层的正文是本 skill 自己的写法，2026-11-10 复核后又改写了一遍：删除了几处近乎逐句意译的句子和沿用来源结构的表格；成员健康度不再分维度上色，改为只抄成员自报；资源冲突与阶段评审改以来源 4、5（MIT）为主。改写后仍保留、与它的思路相近的规则如下，如实列出：
+
+| 与参考来源思路相近的规则 | 在本 skill 的位置 |
+|---|---|
+| 组合汇报不出一个平均的总颜色，红色成员逐个点名 | `portfolio.md` 第 1、6 节 |
+| 按人合计跨项目的投入占比，超出可用量即冲突（另见来源 5） | `portfolio.md` 第 2 节 |
+| 资源计划遇重大变化与按季度重定基线 | `portfolio.md` 第 2 节 |
+| 组合级风险看集中，同一根因跨项目合并看 | `portfolio.md` 第 3 节 |
+| 跨项目依赖的矩阵视图，开工前把跨团队依赖跟双方对上 | `portfolio.md` 第 4 节 |
+| 定期对每个成员做继续与否的表态并记录资源调整（另见来源 5） | `portfolio.md` 第 5 节 |
+| 汇报把需要的决定放在开头 | `portfolio.md` 第 6 节 |
+| 汇总脚本只报告、不判定 | `scripts/portfolio_rollup.py` |
+| 名单之外的人在干活时冲突会被漏掉，下结论前先问名单全不全 | `portfolio.md` 第 2 节 |
+| 组合从没停止或暂停过成员时，追问继续的标准是否起作用（另见来源 5） | `portfolio.md` 第 5 节 |
+| 依赖状态变化时重算跨成员关键路径 | `portfolio.md` 第 4 节 |
+| 组合排序对着组合层统一的目标打分，各成员的指标不可比 | `portfolio.md` 第 5 节 |
+| 组合约定里写升级层级与各级响应时限 | `portfolio.md` 第 0 节 |
+| 拿不准：连续两期为 ⚪ 就登记一条问题，句式与其连续两期为红就升级相近 | `sprint-status-retro.md` 2.1 |
+
+其中资源重定基线、跨成员依赖开工前对齐两条，2026-11-10 第二轮复核指出原写法近乎逐项意译，已改为本 skill 自己的机制：重定基线改由阶段评审、组合复盘、变更请求和 Sprint 计划这些事件驱动；跨成员依赖改为沿用依赖握手，并以在提供方台账里找到对应任务编号作为确认的证据。
+
+以上是通行的项目组合管理做法，本 skill 按自己的规则重新组织和撰写，没有复制其文字、示例与代码，因此未附带 Commons Clause。若日后将本 skill 用于收费产品或服务，建议先复核这部分。
+
 ## MIT License（上游原文）
 
-三个来源使用同一份 MIT 许可正文，版权行分别为：
-
-- Copyright (c) 2026 Ismael G Marin Cabrera（来源 1）
-- Copyright (c) 2025 Commit Media SARL（来源 2）
-- Copyright (c) 2026 AbsolutelySkilled（来源 3）
+五个来源均以 MIT 许可发布。下面是合并后的完整许可声明，各来源的版权行逐条列出：
 
 ```
 MIT License
 
-Copyright (c) <见上方各来源的版权行>
+Copyright (c) 2026 Ismael G Marin Cabrera（来源 1）
+Copyright (c) 2025 Commit Media SARL（来源 2）
+Copyright (c) 2026 AbsolutelySkilled（来源 3）
+Copyright (c) 2026 Anot（来源 4）
+Copyright (c) 2026 Manuel Morano（来源 5）
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
