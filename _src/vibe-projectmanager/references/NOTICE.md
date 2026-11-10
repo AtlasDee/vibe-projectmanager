@@ -1,6 +1,6 @@
 # 来源与许可
 
-本 skill 译写、改编自以下五个开源技能，均为 MIT 许可：
+本 skill 译写、改编自以下六个开源技能，均为 MIT 许可：
 
 | # | 来源 | 版本 / 取得方式 | 版权 |
 |---|---|---|---|
@@ -9,6 +9,7 @@
 | 3 | **AbsolutelySkilled** 的 `project-execution`（v0.1.0，维护者 maddhruv）· 原仓库现为 https://github.com/dhruvjainin/absolute | 该目录在 2026-06-05 的提交 `1ad2c4b`（cleanup & introduce AbsoluteWork）中被删除，取自其父提交 `2f13162` 的 `skills/project-execution/`：SKILL.md 与 3 份 references（risk-management、dependency-tracking、stakeholder-communication）；NeverSight/learn-skills.dev 的镜像缺 SKILL.md 的常见坑一节 | Copyright (c) 2026 AbsolutelySkilled（取自父提交 `2f13162` 的 LICENSE；原仓库现行 LICENSE 的版权行为 Absolute） |
 | 4 | **anotb/management-consulting-plugin** 的 `skills/project-governance`（v2.3.1）· https://github.com/anotb/management-consulting-plugin | 提交 `1489e7e`：SKILL.md 与 `references/risk-and-reporting.md` | Copyright (c) 2026 Anot |
 | 5 | **mmoranodevelop/hard-half** 的 `skills/management/portfolio-stage-gate` 与 `skills/delivery/resource-collision` · https://github.com/mmoranodevelop/hard-half | 提交 `1228fe2`：两份 SKILL.md 与 stage-gate 的 3 份模板 | Copyright (c) 2026 Manuel Morano |
+| 6 | **danielmiessler/LifeOS** 的 `LifeOS/install/skills/RootCauseAnalysis`（v1.1.1）· https://github.com/danielmiessler/LifeOS | 提交 `f6ab5e0`：SKILL.md、MethodSelection.md、Foundation.md 与 5 份 Intents（FiveWhys、Fishbone、KepnerTregoe、FaultTree、Postmortem） | Copyright (c) 2025-2026 Daniel Miessler |
 
 ## 取用与改动：来源 1
 
@@ -42,7 +43,8 @@
 | RAID 日志、概率×影响矩阵、触发条件、假设要尽早验证 | `risk-and-priority.md` 第 1 节 | 原「风险登记」升级为 RAID 日志，保留来源 1 的六类模式与证据要求 |
 | 依赖约定 | `risk-and-priority.md` 1.3 | 与来源 3 的「未确认依赖」合并 |
 | 章程与启动清单、RACI、沟通计划、DACI 与 ADR、变更请求、发布就绪清单、OKR | `governance.md` | 章程的「Out（明确不做）」一栏不取：与团队「只写要做什么」的规范保持一致，需求级排除项按 vibe-designing 写进 PRD 备注文档，难撤回的范围取舍才记 ADR；没有发起人时批准人默认为用户 |
-| 无责复盘与 5 个为什么、复盘行动项 ≤ 3、先看上轮行动项 | `sprint-status-retro.md` 第 3 节 | — |
+| 复盘行动项 ≤ 3、先看上轮行动项 | `sprint-status-retro.md` 第 3 节 | — |
+| 无责复盘与 5 个为什么 | 先在 `sprint-status-retro.md` 第 3 节，(16) 起并入 `root-cause.md` | 与来源 6 合并，见下方来源 6 |
 | 反模式（速率当绩效、只有产出的 OKR、没有唯一负责人、悄悄扩范围等） | SKILL.md 第 6 节、各规程 | 化入规则，不单列表 |
 | 工具选型（Linear / Jira / GitHub Projects / Asana / Notion）与价格提示 | 不取 | 时效性强，且工单系统由用户指定 |
 | 受监管行业、远程团队的调整 | `governance.md` 第 2、6 节各一句 | — |
@@ -98,6 +100,29 @@
 | resource-collision：冲突的定义（同一稀缺的人或技能、两个以上项目、窗口重叠）；点名到人或技能而非团队；需求与可用量要有来源，没有就留空缺；先写排序规则再解；五种解法（排先后、换人、推迟、放弃或停启、外采）；两边兼顾不算解法，除非双方同意并写明日期；关键技能无替补不对半分；只提一个请求；已确认与意向预订分开 | `portfolio.md` 第 2 节，`scripts/portfolio_rollup.py` 资源部分 | 冲突加上需求合计超过可用量的条件；资源分配表加起止日期、类型、预订列，脚本按日期重叠取峰值；改到里程碑的先走变更请求；计划外缓冲只在 Sprint 层扣；来源的不对半分限于安全关键技能，本 skill 扩大到没有替补的关键技能；在来源之外加了可用量列与单个成员内部超出不算组合冲突 |
 | 两个技能的拒答与转交其他技能的路由、利用率不作为决定依据的立场 | 部分取 | 不取路由；利用率只作线索，组合台账不出总分 |
 
+## 取用与改动：来源 6（LifeOS RootCauseAnalysis）
+
+| 内容 | 去向 | 改动 |
+|---|---|---|
+| 按问题的样子选方法的对照表；事故类以复盘为框架、每条线索内套用其他方法；方法之间何时切换 | `root-cause.md` 第 3 节 | 改为交付团队的问题情境，并给出从上往下取第一条的先后；事故以外，跨团队、有几条独立线索的也用复盘做框架；去掉来源的领域对照表与按可用时长选方法的表 |
+| 5 个为什么：层数不固定、分叉成树、收敛点、倒读检验、不停在操作失误或改不了的抽象、缺环不编 | `root-cause.md` 4.1 | 停止条件写成改得动且有人管得着，团队管不着的组织层原因也算并转交拍板人；加不停在人手不够这类笼统说法 |
+| 鱼骨图：候选原因是假设、每条配验证方法、空的类别可能是缺了那方面的人、不编帕累托比例 | `root-cause.md` 4.2 | 来源默认的 6M 分类改为六类（人、流程、工具与环境、需求与输入、外部依赖、组织），其中几类与参考来源 lyndonkl 的根因类别相近，见下文；排先后只用真实计数 |
+| 是与不是对比：四个维度、变化窗口、没发版不等于没变化、留下的原因要解释所有的是且不跟不是矛盾、共同条件不能单独当原因、最好在测试环境回退确认、没有基准不编对比、不适用的情形 | `root-cause.md` 第 3 节、4.3 | 变化举例沿用来源的列表（数据量、定时任务、节假日、排班、外部依赖），加了人员轮换与配置；确认限定在测试环境，做不到写局限 |
+| 故障树：与或门、最小割集、单点优先、共因、有数据才写概率、割集阶数高不能单独当作安全的证据、不独立时不套公式、无冗余时用更简单的方法 | `root-cause.md` 4.4 | 以定性分析为主，有真实数据时才写概率；来源的优先与门、抑制门、异或门，独立事件的概率公式与计算工具不取；共因与组合层的资源冲突、同根对上 |
+| 无责复盘：先有时间线再排原因、按当时能拿到的信息评价决定、直接原因 / 系统因素 / 发现慢 / 恢复慢分开、防线表、做得好照写、经验、行动项要有具体负责人与核实方式、主要行动项只有培训和提醒时回头重查诊断、复查行动项完成与同类问题是否再现、不和绩效混在一起 | `root-cause.md` 第 2、4.5、5、7 节 | 来源要求至少 3 条系统因素，改为有证据的有几条写几条（来源自己也要求不为凑数编）；来源的 30 天复查改为按同类机会的次数定窗口、30 天作下限，写成算式；组织层原因在系统因素里单独标出；来源的 UTC 时间、事件单链接、密级字段不取 |
+| 行动项强度：消除 > 强制或自动化 > 简化或标准化 > 培训 > 提醒或文档 | `root-cause.md` 5.1 | 例子换成交付流程里的 |
+| 不把用户的猜测当事实、证据不足写成缺口、交付的分析已做完 | `root-cause.md` 第 2、7 节 | — |
+| Apollo / RealityCharting、FMEA、跨服务日志与时钟偏差、转交 SystemsThinking 等其他技能的路由、用户自定义配置目录 | 不取 | 本 skill 面向交付团队的项目管理，不做工程级故障诊断（`root-cause.md` 第 1 节写明不适用）；不依赖来源的其他技能 |
+
+在来源之外加了：验证待办与待验证状态、行动项的放弃与不采纳出口、复发先核对机理与第二次重开转交拍板人、行动项去向（台账、RAID、变更请求、拍板人的决定）与 RAID 问题的复核衔接、顺利发布的简版复盘。
+
+Kepner-Tregoe 是 Kepner-Tregoe, Inc. 的商标，本 skill 只用它指明是与不是对比这一思路的出处，方法本身称是与不是对比。来源各文件为英文，本 skill 全部改写为中文，未逐字照搬。
+
+## 本 skill 自撰：WBS 与排期表
+
+`wbs-and-schedule.md` 与 `scripts/schedule_calc.py` 不取自上面六个来源，也没有参考 borghei。其中的通用做法属于项目管理常识，按本 skill 的链路自行写成：WBS 的 100% 规则，正推、逆推求浮动与关键路径，同一责任人不并行的资源排队。关键路径的用法沿用 `risk-and-priority.md` 第 2.2 节（来源 3）。
+字段名和阶段骨架按团队现行的多维表格排期模板整理，示例与夹具全部使用通用名称。
+
 ## 参考：borghei/Claude-Skills（非 MIT，只取思路）
 
 | 参考 | 版本 | 许可 |
@@ -129,9 +154,30 @@
 
 以上是通行的项目组合管理做法，本 skill 按自己的规则重新组织和撰写，没有复制其文字、示例与代码，因此未附带 Commons Clause。若日后将本 skill 用于收费产品或服务，建议先复核这部分。
 
+## 参考：lyndonkl/claude 的 postmortem（未附许可文件，只取思路）
+
+| 参考 | 版本 | 许可 |
+|---|---|---|
+| **lyndonkl/claude** 的 `skills/postmortem` · https://github.com/lyndonkl/claude | 提交 `4acc337`：SKILL.md 与 resources | 仓库没有 LICENSE 文件；README 的许可一节只写了可以随 Claude Code 自由使用，各技能自带署名，不是一份标准的开源许可 |
+
+因为没有明确的许可条款，本 skill 没有使用它的模板、示例与评分表，正文按本 skill 的链路自行撰写。但下面这些与它相同或相近，其中有几处是短语层面的相同，如实列出：
+
+| 与参考来源相同或相近之处 | 在本 skill 的位置 |
+|---|---|
+| 无责复盘分五步，五步的划分与其工作流一致（立案含影响量化、查因、定改法、成文分享、跟踪行动项直到完成）；步骤名本 skill 自拟 | `root-cause.md` 4.5、5.3 |
+| 症状短语总是赶工、没时间测试，以及要改的是不现实的截止日期、资源约束、激励错位，与其系统性问题一条的说法相同（这两句也是本 skill 用户提出需求时的原话）；查证方法、落在链路哪里、谁拍板、第四类范围不受控为本 skill 自撰 | `root-cause.md` 5.2，SKILL.md 第 6 节「对流程，不对人」，README，对外日志 (16) |
+| 写环节放过了它、不写谁犯了错（其护栏一节的写法对照） | `root-cause.md` 第 7 节，SKILL.md 第 6 节「对流程，不对人」 |
+| 不停在某人犯错，追问为什么可能犯错、为什么没拦住 | `root-cause.md` 4.1 |
+| 行动项要具体，不写改进测试、改进沟通、更细心这类说法；要有具名负责人和期限 | `root-cause.md` 5.1、5.2 |
+| 鱼骨图六类里的人、流程、外部依赖、组织，以及工具与环境，与其根因类别和鱼骨分类相近 | `root-cause.md` 4.2 |
+| 影响要量化 | `root-cause.md` 第 2 节 |
+| 事故还在进行时先处理事故；没有可学之处的小问题不做 | `root-cause.md` 第 1 节 |
+
+以上都是通行的事故复盘做法，其中多条在来源 6（MIT）里也有。若日后对方补上许可条款，再按条款复核这部分。
+
 ## MIT License（上游原文）
 
-五个来源均以 MIT 许可发布。下面是合并后的完整许可声明，各来源的版权行逐条列出：
+六个来源均以 MIT 许可发布。下面是合并后的完整许可声明，各来源的版权行逐条列出：
 
 ```
 MIT License
@@ -141,6 +187,7 @@ Copyright (c) 2025 Commit Media SARL（来源 2）
 Copyright (c) 2026 AbsolutelySkilled（来源 3）
 Copyright (c) 2026 Anot（来源 4）
 Copyright (c) 2026 Manuel Morano（来源 5）
+Copyright (c) 2025-2026 Daniel Miessler（来源 6）
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
