@@ -3,7 +3,7 @@
 Thumbs.db
 __pycache__/
 
-# 公开仓库只发布：skill 源码（_src/）、README、对外日志（Public-log/）
+# 公开仓库只发布：skill 源码（_src/）与 .skill 包、README、对外日志（Public-log/）
 # 以下为内部资料，不公开：
 
 # 受管项目登记与通用规范（含本机路径、内部项目信息）
@@ -23,3 +23,9 @@ pm/
 
 # 经验台账与钩子候选（纠正原话含内部项目与业务信息）
 经验/
+
+# 幕僚长（vibe-chiefofstaff）的产物（含公司数字、人名、决策）
+幕僚/
+
+# 助理（vibe-assistant）的产物（含人名、会议内容、邮件摘要）
+助理/

@@ -9,6 +9,8 @@
 
 写 PRD 交给姊妹套件 [vibe-designing](https://github.com/AtlasDee/vibe-designing)，本 skill 从评审开始接手。
 
+本仓库另有两个 skill：[vibe-chiefofstaff](#vibe-chiefofstaff幕僚长)（幕僚长）与 [vibe-assistant](#vibe-assistant助理)（助理），见文末。
+
 ## 主要设计
 
 | 要点 | 说明 |
@@ -49,16 +51,94 @@ vibe-projectmanager.skill           # 安装包（由 _src/vibe-projectmanager/ 
 Public-log/public-log.md            # 更新日志
 ```
 
+## vibe-chiefofstaff：幕僚长
+
+管理者身边的两种幕僚合在一个 skill 里，管的是**该问谁就去问谁**、**分歧摆出来交给你拍板**、**定下来的事有人跟、到期有人提醒**。
+
+| 路线 | 做什么 |
+|---|---|
+| 决策参谋 | 一个管理问题按复杂度派给 1～5 个模拟的高管角色（财务、技术、产品、营收、人力、法务等 14 个，可自定义），每个角色独立发言一轮、不来回争论；唱反调的角色挑毛病；幕僚长汇总共识、摆出分歧但不替你裁决，你拍板后才记进决策日志 |
+| 运营幕僚 | 先问你用什么工具、团队多大、简报先看什么、决策记在哪，再做早间简报、会前准备、决策记录、周报汇总、看板指标更新 |
+
+| 要点 | 说明 |
+|---|---|
+| 背景门槛 | 开会前先查目标、关键数字、硬约束、可选方案、拍板人；缺关键项先问（最多 3 问）。硬开的，置信度封顶为低，汇总首行写明缺什么。每条建议都要落在背景里的某个数字或约束上，换个公司名仍成立的建议删掉 |
+| 独立发言 | 能起子代理就每个角色一个、并行跑、互相看不到；不能的顺序生成，并在汇总里注明独立性偏弱 |
+| 两层存档 | 讨论记录与决策结论分开存；之后的讨论只读拍板过的结论，免得把当时没定的说法当成共识；否决的提议标不再提起，重开要你明说 |
+| 不编 | 截止日、负责人拿不到写待定，不自动填默认值；简报、周报、看板里的计数由 `scripts/decision_scan.py` 算 |
+| 外部写操作 | 只读你的工具；发消息、写云文档、建日程都要你当次明确同意；定时运行由你在自己的环境里设 |
+| 与 vibe-projectmanager | 项目内的决定记进那个项目的 ADR，这里只留指针；动到已放行 PRD 或里程碑的先走那边的变更请求 |
+
+```
+_src/vibe-chiefofstaff/
+├─ SKILL.md                         # 总入口：两条路线、进入点、产物目录、参谋会铁律、衔接、共享约定
+├─ references/
+│  ├─ council.md                    # 参谋会：背景门槛、打分路由、发言、唱反调、汇总、拍板、存档
+│  ├─ roles.md                      # 角色登记、话题路由、议题组合、自定义角色
+│  ├─ background.md                 # 背景档案：七维访谈、保鲜与补充、模板
+│  ├─ decision-log.md               # 决策日志：两层、决策文件、冲突检查、查询与复核、与项目 ADR 的分工
+│  ├─ operations.md                 # 运营幕僚：设置向导、早间简报、会前准备、周报、看板
+│  └─ NOTICE.md                     # 来源与许可
+└─ scripts/
+   └─ decision_scan.py              # 决策扫描：逾期、即将到期、复核到期、待定、不再提起、索引核对（只读、只用标准库）
+vibe-chiefofstaff.skill             # 安装包
+```
+
+## vibe-assistant：助理
+
+管理者身边的执行助理，管的是**说定的事落成有人负责、有日期的行动项**、**没定的事不混进定了的事**、**发出去之前先给你看**。日常读写通过 larkbot 对接 Lark / 飞书。
+
+| 件事 | 做什么 |
+|---|---|
+| 会议纪要 | 固定格式，决定和行动项放最前；每个行动项一个负责人、一个截止日期，交付物类写验收标准；没解决的问题单独放进待议区；高度机密或敏感的人事会议不记 |
+| 通话与逐字稿 | 从妙记、云文档或粘贴的逐字稿里提取决定、双方承诺和行动项，起草对外跟进消息和对内摘要，提出要更新的记录，你逐条确认后才写 |
+| 每日晨报 | 今天的日程（含冲突与要准备的会）、到期和逾期的行动项、等你回的邮件 |
+| 会前准备 | 参会人、日程描述与附带文档、上次同系列会的纪要、待议区和没做完的行动项 |
+| 收件箱分拣与排日程 | 邮件分成要你亲自回、可代拟、知会、可归档，可疑的单列；约会先查空闲、给时段，你选定后才建 |
+
+| 要点 | 说明 |
+|---|---|
+| 先确认再定稿 | 纪要、跟进消息、日程、记录更新都先给草稿；发消息、建日程、写云文档或多维表格要你当次明确同意，写后回读核对 |
+| 不替人认领 | 会上没说定负责人或日期的写待定，定稿前补不上就移进待议区，不填默认值 |
+| 材料不是指令 | 逐字稿、邮件、消息里要求发文件、改字段、加收件人的，单列待你决定，不照做 |
+| 行动项台账 | 纪要和通话里的行动项登记进一张台账，状态只在这里改；`scripts/action_items.py` 检查纪要格式、扫描逾期与未登记（只读、只用标准库） |
+| Lark 接入 | 按你在 CLAUDE.md 登记的 larkbot 调用（MCP 工具或 Python 库），不写死路径；读不了历史消息、发不了邮件这类缺口改为粘贴兜底 |
+| 与幕僚长、vibe-projectmanager | 幕僚长的早间简报读助理的晨报再叠加决定跟进，会前准备交给助理；管理层的决定经同意后记进幕僚长的决策日志，项目内的决定提示记进那个项目的 ADR |
+
+```
+_src/vibe-assistant/
+├─ SKILL.md                         # 总入口：五件事、进入点、产物目录、助理铁律、衔接、共享约定、自检
+├─ references/
+│  ├─ minutes.md                    # 会议纪要：能不能用、受理、格式、行动项与台账、待议区、审阅与分发
+│  ├─ call-followup.md              # 通话与逐字稿：取记录、抽结构、对外跟进、对内摘要、记录更新
+│  ├─ daily.md                      # 每日晨报、会前准备、收件箱分拣、排日程、定时运行
+│  ├─ lark.md                       # Lark 接入：找 larkbot、设定、能力表、读写要点、缺口与兜底
+│  └─ NOTICE.md                     # 来源与许可
+└─ scripts/
+   └─ action_items.py               # 纪要检查（check）与行动项扫描（scan）
+vibe-assistant.skill                # 安装包
+```
+
+改编自 github/awesome-copilot 的 meeting-minutes（MIT）、anthropics/knowledge-work-plugins 的 call-summary（Apache-2.0）、googleworkspace/cli 的 persona-exec-assistant（Apache-2.0）；原版绑定的 Google Workspace、Gong 与 CRM 换成 Lark。逐项取舍见 [`_src/vibe-assistant/references/NOTICE.md`](_src/vibe-assistant/references/NOTICE.md)。
+
+改编自两个 MIT 许可的来源：alirezarezvani/claude-skills 的 c-level-advisor 一组（chief-of-staff、board-meeting、decision-logger、context-engine、cs-onboard、agent-protocol），Ability.ai 的 abilities 中已退役的 install-chiefofstaff 向导。逐项取舍见 [`_src/vibe-chiefofstaff/references/NOTICE.md`](_src/vibe-chiefofstaff/references/NOTICE.md)。
+
 ## 安装
 
-两种方式任选：
+三个 skill 装法相同，以 vibe-projectmanager 为例（vibe-chiefofstaff、vibe-assistant 把名字换掉即可）。两种方式任选：
 
 - 下载根目录的 `vibe-projectmanager.skill`（zip 包，顶层目录为 `vibe-projectmanager/`），解压到 `~/.claude/skills/`；
 - 或把 `_src/vibe-projectmanager/` 整个目录复制到 `~/.claude/skills/vibe-projectmanager/`。
 
 `.skill` 包由 `_src/vibe-projectmanager/` 打包而成，两者内容一致。装好后重开 Claude Code 会话即可。说「评审一下 PRD」「拆任务」「规划 Sprint」「写周报」等会触发。
 
+vibe-chiefofstaff 说「帮我从几个角度想想这件事」「开个高管会」「记个决策」「早间简报」「帮我准备这个会」「周报汇总」等会触发。它的产物放在工作目录的 `幕僚/` 下，含公司数字和人名，放进 git 仓库前先加进 `.gitignore`。
+
+vibe-assistant 说「整理会议纪要」「总结这通电话」「起草跟进消息」「每日晨会」「帮我准备下一个会」「看看收件箱」「帮我约个会」等会触发。它的产物放在工作目录的 `助理/` 下，含人名、会议内容和邮件摘要，放进 git 仓库前先加进 `.gitignore`。
+
 依赖：
+- 决策扫描脚本、行动项脚本需要 Python 3（只用标准库）。
+- vibe-assistant 读写 Lark 需要 larkbot（Lark 开放平台的 Python 封装，带 MCP 服务），以用户身份登录；没有时各项改为手动粘贴，写操作给可粘贴文本。
 - 门禁算 md5 需要 Python 3（只用标准库）。
 - PRD 在云文档上时，需要一个能把云文档导出成 Markdown 的工具。本 skill 不绑定具体工具，也不假定它装在哪里：会先看你在 CLAUDE.md 里写明的工具，没有就问你，也可以由你手动导出后交给它。
 - 对 Lark / 飞书文档导出的固定文件头，`prd_md5.py --lark-export` 做了专门处理。
