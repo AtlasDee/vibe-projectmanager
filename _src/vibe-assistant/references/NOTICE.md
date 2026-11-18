@@ -64,6 +64,13 @@
 - 设定模板（`lark.md` 第 1 节）
 - 与 vibe-chiefofstaff、vibe-projectmanager 的分工（SKILL.md 第 5 节）
 
+## 调用：obsidianmd/obsidian-skills 的 obsidian-markdown（MIT，不改编）
+
+- 链接：https://github.com/obsidianmd/obsidian-skills ，2026-11-18 核对的是本机插件 1.2.0 附带的 LICENSE（Copyright 2026 Steph Ango）与 plugin.json，没有打开 GitHub 页面。
+- 用法：第 6 节「Markdown 写法分两类」要求写工作类产物时，装了它就加载它；本 skill 不打包、不依赖它。
+- 没装时的三条写法摘要（属性块、callout、双链）是自己写的，没有使用它的文字。
+- 没用：交付类产物不用它的专有写法（云文档和群消息不认）；`==高亮==` 不用来代替【】。
+
 ## 许可原文
 
 ### 来源 1：MIT License
